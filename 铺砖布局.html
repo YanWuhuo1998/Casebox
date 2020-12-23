@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            /* 主轴方向：垂直 */
+            flex-direction: column;
+            background: red;
+        }
+
+        header,
+        footer {
+            height: 60px;
+            background: yellow;
+        }
+
+        main {
+            /* 占满生于空间 */
+            flex: 1;
+            /* y轴卷动 */
+            overflow-y: scroll;
+        }
+
+        ul {
+            display: flex;
+            /* 项目是否换行:换行 */
+            flex-wrap: wrap;
+            /* 项目在主轴上对齐方式：两端对齐 */
+            justify-content: space-between;
+        }
+
+        li {
+            /*   
+            clac()
+            1.需要注意的是，运算符前后都需要保留一个空格，例如：width: calc(100% - 10px)；
+            2.任何长度值都可以使用calc()函数进行计算；
+            3.calc()函数支持 "+", "-", "*", "/" 运算；
+            4.calc()函数使用标准的数学运算优先级规则；
+            */
+            width: calc(33% - 0.5px);
+            background: #f6f6f6;
+            height: 160px;
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 头部 -->
+    <header></header>
+    <!-- 主体 -->
+    <main>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </main>
+    <!-- 尾部 -->
+    <footer></footer>
+</body>
+
+</html>

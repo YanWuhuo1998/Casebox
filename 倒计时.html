@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>12点场： <span id="time"></span></h1>
+    <script>
+        let deadline = 12 * 3600; //定义到了的时间秒数
+        function getTimes() {
+            let now = new Date();
+            let nowSec = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds(); //获取当前的秒数
+            let interval = deadline - nowSec; //2个时间秒数差
+            if (interval <= 0) { //时间到了
+                let seced = (parseInt((now.getHours() - deadline / 3600)) * 3600 + now.getMinutes() * 60 + now
+                    .getSeconds()); //现在过了多少秒数
+                interval = 24 * 3600 - seced; //总时间减去现在过了多少秒，重新获得时间差
+
+            }
+            let hour = Math.floor(interval / 3600);
+            let minutes = Math.floor((interval % 3600) / 60);
+            let second = Math.floor(interval % 60);
+            time.innerHTML = getNum(hour) + ' : ' + getNum(minutes) + ' : ' + getNum(second);
+
+        }
+
+        function getNum(n) {
+            return n <= 9 ? "0" + n : n
+        }
+        setInterval(getTimes, 1000);
+        getTimes();
+    </script>
+
+</body>
+
+</html>

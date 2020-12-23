@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        ul li {
+            border: 1px solid #000;
+            text-align: center;
+            line-height: 200px;
+            font-size: 36px;
+            box-sizing: border-box;
+            margin-bottom: 5px;
+        }
+
+        /* 媒体查询 */
+        /* 大屏>=992 */
+        @media screen and (min-width:992px) {
+            ul li {
+                width: calc(25% - 3.75px);
+            }
+        }
+
+        /* 中屏 */
+        @media screen and (max-width:992px) {
+            ul li {
+                width: calc(50% - 2.5px);
+            }
+        }
+
+        /* 小屏 */
+        @media screen and (max-width:576px) {
+            ul li {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>01</li>
+        <li>02</li>
+        <li>03</li>
+        <li>04</li>
+        <li>05</li>
+        <li>06</li>
+        <li>05</li>
+        <li>06</li>
+    </ul>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+</body>
+
+</html>

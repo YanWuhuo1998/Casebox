@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .tab {
+            width: 30vh;
+            height: 34vh;
+            margin: 50px auto;
+            border: 1px solid red;
+        }
+
+        #ul {
+            overflow: hidden;
+            display: flex;
+        }
+
+        #ul li {
+
+            justify-content: space-between;
+            width: 10vh;
+            height: 4vh;
+            text-align: center;
+            line-height: 4vh;
+            background: #f60;
+        }
+
+        #ul li.active {
+            background: skyblue;
+        }
+
+        #div {
+            height: 30vh;
+            display: flex;
+        }
+
+        #div div {
+            height: 30vh;
+            width: 100%;
+            font-size: 5vh;
+            line-height: 30vh;
+            text-align: center;
+            background: pink;
+            display: none;
+        }
+
+        #div div.cur {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <!-- 标题栏 -->
+        <ul id="ul">
+            <li class="active"> 1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <!-- 内容块 -->
+        <div id="div">
+            <div class="cur">1</div>
+            <div>2</div>
+            <div>3</div>
+        </div>
+    </div>
+</body>
+<script>
+    /* 分析：
+事件源：标题栏中的li
+事件类型：鼠标移入mouseenter
+事件处理函数：
+处理头部的样式
+事件源标签上有active类名，其他li身上没有active类名
+处理内容区域
+与头部对应的那个div添加类名cur，其他的div去掉类名cur 
+标题中的li的个数与内容区域中的div的个数是相同的，他们的索引也是一一对应的
+
+ */
+    // 获取
+    let lis = document.querySelectorAll("#ul li");
+    let divs = document.querySelectorAll("#div div");
+    /* for (let i = 0; i < lis.length; i++) {
+        // i的每一次取值就代表一个li标签
+        lis[i].addEventListener("mouseenter", function () {
+            //    先移除所有人身上的class
+            for (let j = 0; j < lis.length; j++) {
+                lis[j].classList.remove("active");
+            }
+            // 再给自己添加样式
+            this.classList.add("active");
+            for (let j = 0; j < divs.length; j++) {
+                divs[j].classList.remove("cur");
+            }
+            // 获取对应的div进行添加类名cur
+            divs[i].classList.add("cur");
+        })
+    }  基础版*/
+    // 精简版
+    for (let i = 0; i < lis.length; i++) {
+        // i的每一次取值就代表一个li标签
+        lis[i].addEventListener("mouseenter", function () {
+            //    先移除所有人身上的class
+            for (let j = 0; j < lis.length; j++) {
+                lis[j].classList.remove("active");
+                divs[j].classList.remove("cur");
+            }
+            // 再给自己添加样式
+            this.classList.add("active");
+            // 获取对应的div进行添加类名cur
+            divs[i].classList.add("cur");
+        })
+    }
+</script>
+
+</html>

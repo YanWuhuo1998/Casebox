@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="charset">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>盒子压线</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            /* 外层盒子一定要设置宽高，不然没有效果 */
+            width: 400px;
+            height: 100px;
+            /* 此处颜色要么与背景颜色相同，要么设置为透明 */
+            background: #f3f3f3;
+            /* 这里是外层盒子的下边框，用来作为外层盒子文字两侧的线条 */
+            border-bottom: 2px dotted blue;
+            /* 盒子居中效果，与本效果无关，只是让效果直观一些 */
+            margin: 100px auto;
+        }
+
+        .inbox {
+            /* 此处设置内层盒子宽度是为了调整线条与盒子的紧密程度 */
+            width: 200px;
+            font-size: 20px;
+            font-weight: bold;
+            /* 文字居中方式 */
+            text-align: center;
+            /* 此处必须将盒子颜色设置为白色，用于遮盖背景色 */
+            background: #fff;
+            /* 此处：内层盒子要在外层盒子的中间显示 */
+            margin: 0 auto;
+            /* 使用内边距将内层盒子相对与外层盒子往下压，实现压线效果 */
+            padding-top: 90px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="inbox">
+            盒子压线效果
+        </div>
+    </div>
+</body>
+
+</html>

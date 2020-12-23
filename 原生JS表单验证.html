@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ch">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #btn {
+            background-color: #f60;
+            width: 100px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            font-size: 24px;
+            color: #fff;
+            outline: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        #maskbox {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: auto;
+            display: none;
+        }
+
+        .model {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -200px;
+            margin-left: -210px;
+        }
+
+        #register {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            height: 420px;
+            background: #fff;
+        }
+
+        h1 {
+            width: 100%;
+            font-size: 24px;
+            line-height: 40px;
+            height: 40px;
+            color: #f60;
+            text-align: center;
+            border-bottom: 2px solid #f60;
+
+        }
+
+        .from {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .from .in {
+            margin-bottom: 30px;
+        }
+
+        .from .in input {
+            width: 100%;
+            height: 40px;
+            border: 1px solid #ddd;
+            outline: none;
+            box-sizing: border-box;
+            text-indent: 10px;
+            border-radius: 5px;
+        }
+
+        .from .in span {
+            display: inline-block;
+            height: 16px;
+            text-indent: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .from .btn {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            display: inline-block;
+            outline: none;
+            border: none;
+            width: 80px;
+            height: 40px;
+            background: #f60;
+            color: #fff;
+            font-size: 16px;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        #close {
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 按钮 -->
+    <div id="btn">注册</div>
+    <!-- 蒙版层 -->
+    <div id="maskbox" class="maskbox">
+        <!-- 注册框 -->
+        <div class="model">
+            <form action="#" id="myform">
+                <div id="register">
+                    <h1>用户注册</h1>
+                    <div class="from">
+                        <div class="in"><input type="text" placeholder="请输入用户名" id="username" value="">
+                            <span>中文、字母、数字、下划线长度2-12位</span>
+                        </div>
+                        <div class="in"><input type="text" placeholder="请输入邮箱" id="email" value="">
+                            <span>有效的邮箱</span></div>
+                        <div class="in"><input type="text" placeholder="请输入密码" id="pwd" value="">
+                            <span>字母、数字、下划线长度6-12位</span></div>
+                        <div class="btn">
+                            <button id="close">关闭</button>
+                            <button id="reg">注册</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    // 获取元素
+    let btn = document.getElementById("btn")
+    let maskbox = document.getElementById("maskbox")
+    let close = document.getElementById("close")
+    let username = document.getElementById("username")
+    let email = document.getElementById("email")
+    let pwd = document.getElementById("pwd")
+    let myform = document.getElementById("myform")
+    // 为注册按钮添加点击事件，让模态框显示
+    btn.addEventListener("click", function () {
+        maskbox.style.display = "block"
+    })
+    // 点击关闭按钮，关闭模态框
+    close.addEventListener("click", function () {
+        maskbox.style.display = "none"
+    })
+    // 用户名失去焦点时验证
+    username.addEventListener("blur", function () {
+        let reg = /^[\u4E00-\u9FA5A-Za-z0-9_]{2,10}$/
+        if (reg.test(this.value)) {
+            this.style.borderColor = "green"
+            this.nextElementSibling.style.color = "#666"
+            nameflag = true
+        } else {
+            this.style.borderColor = "red"
+            this.nextElementSibling.style.color = "red"
+
+            nameflag = false
+        }
+    })
+    // 邮箱
+    email.addEventListener("blur", function () {
+        let reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+        if (reg.test(this.value)) {
+            this.style.borderColor = "green"
+            this.nextElementSibling.style.color = "#666"
+
+            emailflag = true
+        } else {
+            this.style.borderColor = "red"
+            this.nextElementSibling.style.color = "red"
+
+            emailflag = false
+        }
+    })
+    // 密码
+    pwd.addEventListener("blur", function () {
+        let reg = /^[a-zA-Z0-9_-]{6,12}$/
+        if (reg.test(this.value)) {
+            this.style.borderColor = "green"
+            this.nextElementSibling.style.color = "#666"
+            pwdflag = true
+        } else {
+            this.style.borderColor = "red"
+            this.nextElementSibling.style.color = "red"
+            pwdflag = false
+        }
+    })
+    // 定义三个变量（标杆）
+    let nameflag = true;
+    let emailflag = true;
+    let pwdflag = true
+    // 表单提交
+    myform.addEventListener("submit", function (e) {
+        //    只要有一项验证没通过，就不给表单放行
+        // 获取焦点事件
+        username.focus();
+        email.focus();
+        pwd.focus();
+        //    触发输入框的失去焦点的事件
+        username.blur();
+        email.blur();
+        pwd.blur();
+        // 如果三个都通过
+        let bool = nameflag && emailflag && pwdflag
+        if (!bool) {
+            // 阻止表单提交
+            e.preventDefault();
+        } else {
+
+        }
+    })
+</script>
+
+</html>

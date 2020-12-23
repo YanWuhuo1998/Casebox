@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>下拉菜单效果演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            /* 清除a标签的下划线和字体颜色 */
+            text-decoration: none;
+            color: #000;
+        }
+
+        #menu {
+            width: 1200px;
+            margin: 0 auto;
+            background: #f3f3f3;
+        }
+
+        /* 此处用于清除浮动带来的影响；在板块后定义一个after的伪类*/
+        #menu:after {
+            content: '';
+            /* 内容为空 */
+            display: block;
+            /* 转块级元素 */
+            height: 0;
+            /* 高度为零 */
+            clear: both;
+            /* 清除浮动 */
+            zoom: 1;
+            /* 为了兼容其他浏览器 */
+        }
+
+        /* 在此使用子选择是为了不会产生标签污染的情况 */
+        #menu>ul>li {
+            /* 该ul标签下所有下的li标签都进行右浮动 */
+            float: right;
+            /* 清除li标签的默认小圆点样式 */
+            list-style: none;
+            background: yellowgreen;
+            /* 左间距20像素 */
+            margin-left: 20px;
+            width: 120px;
+            /* 行高：用于文本垂直居中 */
+            line-height: 70px;
+            /* 文本居中 */
+            text-align: center;
+            /* 父级元素相对定位 */
+            position: relative;
+            /* 边框圆角 */
+            border-radius: 10px;
+        }
+
+        #menu>ul>li .submenu {
+            width: 120px;
+            /* 子级元素相对与父级元素的绝对定位 */
+            position: absolute;
+            left: 0;
+            top: 70px;
+            /* 注意这里超过了父元素里定义的高度，就会出现摸上去后移动鼠标下拉选项消失的bug */
+            list-style: none;
+            /* 隐藏 */
+            display: none;
+            /* 显示于最上层，避免排版塌陷 */
+            z-index: 9999;
+        }
+
+        /* <!-- 这里是进行下拉菜单样式的修改 --> */
+        #menu>ul>li .submenu li {
+            line-height: 50px;
+            background: red;
+            border-radius: 6px;
+        }
+
+        /* 反选，除最后一个外其他的li标签加上下边线 */
+        #menu>ul>li .submenu li:not(:last-child) {
+            margin-bottom: 4px;
+            border-bottom: 1px dashed #151515;
+
+        }
+
+        /* 摸到父级元素时将下拉菜单显示出来 */
+        #menu>ul>li:hover .submenu {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="menu">
+        <ul>
+            <li> <a href="#"> 咕咕咕</a>
+                <ul class="submenu">
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                </ul>
+            </li>
+            <li> <a href="#"> 咕咕咕</a>
+                <ul class="submenu">
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                </ul>
+            </li>
+            <li> <a href="#"> 咕咕咕</a>
+                <ul class="submenu">
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                </ul>
+            </li>
+            <li> <a href="#"> 咕咕咕</a>
+                <ul class="submenu">
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                </ul>
+            </li>
+            <li> <a href="#"> 咕咕咕</a>
+                <ul class="submenu">
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                </ul>
+            </li>
+            <li> <a href="#"> 咕咕咕</a>
+                <ul class="submenu">
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                    <li><a href="#">喵喵喵</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

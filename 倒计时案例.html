@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>倒计时demo</title>
+    <style>
+        body {
+            /* background: url('1.gif') no-repeat; 背景图，可以自行添加*/
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            min-width: 960px;
+        }
+
+        .container {
+            margin-top: 20px;
+            margin-left: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <h1 class="title"></h1>
+        </div>
+        <h2 class="endTime"></h2>
+        <h2 class="currentTime"></h2>
+    </div>
+</body>
+
+<script>
+    let format = "2020-12-16 00:00:00 "
+    let title = '距离:' + format + '还有'
+    document.querySelector('.title').innerHTML = title
+    setInterval(() => {
+        document.querySelector('.currentTime').innerHTML = '当前时间:' + currentTime();
+        document.querySelector('.endTime').innerHTML = endTime(format);
+    });
+
+
+    function currentTime() {
+        let date = new Date();
+        let year = date.getFullYear();
+        let getMonth = date.getMonth() + 1;
+        let month = getMonth < 10 ? "0" + getMonth : getMonth;
+        let day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+        let hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        let minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        let second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+        return `${year}-${month}-${day} ${hour}:${minute}:${second}`
+    }
+
+    console.log(currentTime())
+
+    function endTime(format) {
+        let date = new Date();
+        let now = date.getTime();
+        let endDate = new Date(format);
+        let end = endDate.getTime();
+        let leftTime = (end - now) / 1000;
+        if (leftTime >= 0) {
+            let day = Math.floor(leftTime / 60 / 60 / 24);
+            let hour = Math.floor(leftTime / 60 / 60 % 24);
+            let minute = Math.floor(leftTime / 60 % 60);
+            let second = Math.floor(leftTime % 60);
+            return `${day}天${hour}小时${minute}分${second}秒`;
+        } else {
+            alert('时间已过')
+        }
+    }
+</script>
+
+</html>

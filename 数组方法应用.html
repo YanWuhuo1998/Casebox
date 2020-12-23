@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    table,
+    td,
+    th {
+      border: 1px solid #ccc;
+    }
+
+    table {
+      width: 300px;
+      line-height: 30px;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+
+<body>
+  <p>
+    <input type="button" name="" id="btn1" value="按照学号排序sort">
+    <input type="button" name="" id="btn2" value="筛选出大于等于18岁的学生filter">
+    <input type="button" name="" id="btn3" value="是否有不及格的学生some">
+    <input type="button" name="" id="btn4" value="是否所有学生都满18岁every">
+    <input type="button" name="" id="btn5" value="把所有学生的年龄都加1 map">
+    <input type="button" name="" id="btn6" value="找出第一个分数大于80的学生find">
+
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>爱好</th>
+        <th>分数</th>
+      </tr>
+    </thead>
+
+    <tbody id="datalist">
+      <!-- <tr>
+        <td>003</td>
+        <td>小花</td>
+        <td>18</td>
+        <td>看书</td>
+        <td>90</td>
+      </tr> -->
+    </tbody>
+
+  </table>
+  <p>筛选结果:</p>
+  <table>
+    <thead>
+      <tr>
+        <th>学号</th>
+        <th>姓名</th>
+        <th>年龄</th>
+        <th>爱好</th>
+        <th>分数</th>
+      </tr>
+    </thead>
+
+    <tbody id="stulist">
+      <tr>
+        <td>003</td>
+        <td>小花</td>
+        <td>18</td>
+        <td>看书</td>
+        <td>90</td>
+      </tr>
+    </tbody>
+
+  </table>
+  <script>
+    let datalist = document.getElementById("datalist");
+    let stulist = document.getElementById("stulist");
+    //准备原始数据
+    let initArr = [{
+        sno: 1001,
+        uname: "翠花",
+        age: 18,
+        enjoy: "酸菜啊酸菜",
+        score: 99
+      },
+      {
+        sno: 1005,
+        uname: "张三疯",
+        age: 88,
+        enjoy: "太极拳",
+        score: 100
+      },
+      {
+        sno: 1003,
+        uname: "张无忌",
+        age: 28,
+        enjoy: "九阳神功",
+        score: 90
+      },
+      {
+        sno: 1006,
+        uname: "灭绝师太",
+        age: 166,
+        enjoy: "倚天剑",
+        score: 59
+      }
+    ]
+    //1按照学号排序sort
+    btn1.onclick = function () {
+      // alert(1)
+      initArr.sort(function (a, b) {
+        // console.log(a.sno,b.sno);
+        //根据学号进行升序排序
+        return a.sno - b.sno
+      })
+      console.log(initArr);
+      showData(initArr, stulist)
+    }
+    //筛选出大于等于18岁的学生filter
+    btn2.onclick = function () {
+      let newArr = initArr.filter(function (val, index) {
+        // console.log(val.age);
+        return val.age >= 18;
+      })
+      // console.log(newArr);
+      showData(newArr, stulist)
+
+    }
+    //是否有不及格的学生some
+    btn3.onclick = function () {
+      // alert(1)
+      let bool = initArr.some(function (val) {
+        return val.score < 60;
+      })
+      // alert(bool)
+      if (bool) {
+        alert("有不及格的学生")
+      } else {
+        alert("没有不及格的学生")
+      }
+    }
+    //是否所有学生都满18岁every
+    btn4.onclick = function () {
+      let bool = initArr.every(function (val) {
+        return val.age >= 18;
+      })
+      if (bool) {
+        alert("都是成年人")
+      } else {
+        alert("有未成年人")
+      }
+    }
+    //把所有学生的年龄都加1
+    btn5.onclick = function () {
+      // alert(1)
+      initArr.map(function (val, index) {
+        //  console.log(++val.age);
+        //  return  val.age = ++val.age
+        // console.log(val,index);
+        initArr[index].age = ++val.age;
+
+      })
+      console.log(initArr);
+      showData(initArr, stulist)
+
+
+    }
+    //找出第一个分数大于80的学生find
+    btn6.onclick = function () {
+      let obj = initArr.find(function (val, index, arr) {
+        return val.score > 80;
+      })
+      console.log(obj);
+      // let arr=[obj];
+      showData([obj], stulist)
+    }
+    showData(initArr, datalist);
+    //第一个参数表示要处理的数组，
+    //第二个参数表示要显示数据的位置
+    function showData(arr, loc) {
+      let str = "";
+      arr.forEach(function (val, i, arr) {
+        // console.log(val,i,arr);
+        str += `
+        <tr>
+            <td>${val.sno}</td>
+            <td>${val.uname}</td>
+            <td>${val.age}</td>
+            <td>${val.enjoy}</td>
+            <td>${val.score}</td>
+          </tr>
+     `
+      })
+      // console.log(str);
+      loc.innerHTML = str;
+    }
+  </script>
+</body>
+
+</html>
